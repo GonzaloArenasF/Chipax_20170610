@@ -16,11 +16,13 @@ var request 	= require('request');
 var http 		= require('http');
 var mysql   	= require('mysql');
 var dateFormat 	= require('dateformat');
+var path    	= require("path");
 
 /*
 	Instancia de Express
  */
 var app = express();
+app.use(express.static(__dirname + '/public'));
 
 /*
 	Definición del servidor
@@ -58,7 +60,11 @@ connection.connect( function (err) {
 /*
 	Servicios
  */
-app.get('/indicadores', function (req, res) { /* Indicadores */
+app.get('/', function (req, res) {
+	res.sendFile('index.html');
+});
+
+app.get('/setindicadores', function (req, res) { /* Indicadores */
 	
 	request('http://mindicador.cl/api', function (err, ret, html){
 
@@ -66,17 +72,17 @@ app.get('/indicadores', function (req, res) { /* Indicadores */
 
 			var indicadores = JSON.parse(html);
 			
-			guardarValorIndicador(indicadores.dolar);
-			guardarValorIndicador(indicadores.dolar_intercambio);
-			guardarValorIndicador(indicadores.euro);
-			guardarValorIndicador(indicadores.imacec);
-			guardarValorIndicador(indicadores.ipc);
-			guardarValorIndicador(indicadores.ivp);
-			guardarValorIndicador(indicadores.libra_cobre);
-			guardarValorIndicador(indicadores.tasa_desempleo);
-			guardarValorIndicador(indicadores.tpm);
-			guardarValorIndicador(indicadores.uf);
-			guardarValorIndicador(indicadores.utm);
+			setIndicador(indicadores.dolar);
+			setIndicador(indicadores.dolar_intercambio);
+			setIndicador(indicadores.euro);
+			setIndicador(indicadores.imacec);
+			setIndicador(indicadores.ipc);
+			setIndicador(indicadores.ivp);
+			setIndicador(indicadores.libra_cobre);
+			setIndicador(indicadores.tasa_desempleo);
+			setIndicador(indicadores.tpm);
+			setIndicador(indicadores.uf);
+			setIndicador(indicadores.utm);
 
 			res.send(JSON.stringify({
 				estado	: 	true,
@@ -86,6 +92,18 @@ app.get('/indicadores', function (req, res) { /* Indicadores */
 		} else {
 			res.send(err);
 		};
+
+	});
+
+});
+
+app.get('/getindicadores', function (req, res) {
+
+	var hoy 	= dateFormat(new Date (), "yyyy-mm-dd HH:MM:ss");
+	var query 	= 'SELECT * FROM ' + tablas.indicador;
+	var insert 	= connection.query (query, function (error, results, fields) {
+		
+		res.send(JSON.stringify(results));
 
 	});
 
@@ -103,7 +121,7 @@ app.get('/indicadores', function (req, res) { /* Indicadores */
 	}
 
  */
-function guardarValorIndicador (oIndicador) {
+function setIndicador (oIndicador) {
 
 	/*
 		Objeto a insertar
@@ -140,3 +158,10 @@ function guardarValorIndicador (oIndicador) {
 	});
 
 }	
+
+/*
+	Rescate de valores desde la BD
+ */
+function getIndicadores () {
+
+}
