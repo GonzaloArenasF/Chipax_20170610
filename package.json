@@ -1,0 +1,26 @@
+{
+  "name": "chipax_20170610",
+  "version": "1.0.0",
+  "description": "Pruebas de consumo de servicios financieros con NodeJS",
+  "main": "app.js",
+  "dependencies": {
+    "dateformat": "^2.0.0",
+    "express": "^4.15.3",
+    "gulp-sass": "^3.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node_service.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GonzaloArenasF/Chipax_20170610.git"
+  },
+  "author": "Gonzalo A. Arenas Flores <gonzalo.arenas.flores@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GonzaloArenasF/Chipax_20170610/issues"
+  },
+  "homepage": "https://github.com/GonzaloArenasF/Chipax_20170610#readme"
+}
