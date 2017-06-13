@@ -1,4 +1,4 @@
-## NodeJS + Bootstrap CSS + Sass + jQuery
+## NodeJS + Bootstrap CSS + Sass + jQuery + MySQL
 
 Esta aplicación es mi primer trabajo utilizando NodeJS. Su operación principal es consultar indicadores económicos desde un servicio REST. Posteriormente estos datos se guardan en una base de datos MySQL cuya tabla de destino debe cumplir la siguiente estructura:
 
